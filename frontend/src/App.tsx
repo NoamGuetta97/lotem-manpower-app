@@ -22,7 +22,7 @@ const App = () => {
     <AuthProvider>
       <CacheProvider value={rtlCache}>
         <ThemeProvider theme={theme}>
-          <MainRouter></MainRouter>
+          <MainRouter />
         </ThemeProvider>
       </CacheProvider>
     </AuthProvider>
