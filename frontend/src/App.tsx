@@ -7,12 +7,15 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import stylisRTLPlugin from "stylis-plugin-rtl";
-import RamadPage from "./pages/RamadPage";
+import RaanPage from "./pages/RaanPage";
+import NotFound from "./pages/NotFound";
+import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 
 const App = () => {
   const routes = [
     { path: "/", element: <LoginPage /> },
-    { path: "/dashboard", element: <RamadPage /> },
+    { path: "/dashboard", element: <RaanPage /> },
+    { path: "*", element: <NotFound /> },
   ];
   const theme = createTheme({
     direction: "rtl",
@@ -21,6 +24,8 @@ const App = () => {
     key: "muirtl",
     stylisPlugins: [prefixer, stylisRTLPlugin],
   });
+
+  ModuleRegistry.registerModules([AllCommunityModule]);
 
   return (
     <AuthProvider>
@@ -33,7 +38,7 @@ const App = () => {
                   key={route.path}
                   path={route.path}
                   element={
-                    route.path === "/" ? (
+                    ["/", "*"].includes(route.path) ? (
                       route.element
                     ) : (
                       <ProtectedRoute>{route.element}</ProtectedRoute>
