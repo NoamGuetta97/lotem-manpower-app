@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
+import { CustomAlert } from "../components/CustomAlert";
 
 const LoginPage = () => {
   const [userName, setuserName] = useState("");
@@ -23,7 +24,10 @@ const LoginPage = () => {
       login();
       navigate("/dashboard");
     } else {
-      alert("Invalid credentials");
+      CustomAlert({
+        title: "שגיאת התחברות",
+        text: "שם המשתמש או הסיסמה אינם נכונים.",
+      });
     }
   };
 
