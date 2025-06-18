@@ -6,21 +6,26 @@ import {
   Typography,
   Box,
   Paper,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/AuthContext";
 import { CustomAlert } from "../components/CustomAlert";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const LoginPage = () => {
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (userName === "admin@example.com" && password === "admin") {
+    if (userName === "admin" && password === "admin") {
       login();
       navigate("/dashboard");
     } else {
@@ -30,6 +35,8 @@ const LoginPage = () => {
       });
     }
   };
+
+  const handleTogglePassword = () => setShowPassword((prev) => !prev);
 
   return (
     <Container maxWidth="sm">
@@ -50,13 +57,22 @@ const LoginPage = () => {
           />
           <TextField
             label="סיסמה"
-            type="password"
+            type={showPassword ? "text" : "password"}
             variant="outlined"
             fullWidth
             margin="normal"
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleTogglePassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
           <Button
             type="submit"
@@ -64,6 +80,7 @@ const LoginPage = () => {
             color="primary"
             fullWidth
             sx={{ mt: 2 }}
+            disabled={!userName || !password}
           >
             התחברות
           </Button>
