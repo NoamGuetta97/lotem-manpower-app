@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./components/AuthContext";
 import LoginPage from "./pages/LoginPage";
-import RamadPage from "./pages/RamadPage";
 import { createTheme, ThemeProvider } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import { prefixer } from "stylis";
 import stylisRTLPlugin from "stylis-plugin-rtl";
+import RamadPage from "./pages/RamadPage";
 
 const App = () => {
   const routes = [
