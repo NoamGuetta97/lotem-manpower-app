@@ -10,6 +10,15 @@ import MainRouter from "./routeManagment/MainRouter";
 const App = () => {
   const theme = createTheme({
     direction: "rtl",
+    palette: {
+      mode: "light",
+      primary: { main: "#88cfbf" },
+      secondary: { main: "#f2f2f2" },
+      background: { default: "#f5f5f5" },
+    },
+    typography: {
+      fontFamily: "Aharoni",
+    },
   });
   const rtlCache = createCache({
     key: "muirtl",

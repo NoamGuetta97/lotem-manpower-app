@@ -27,7 +27,7 @@ const LoginPage = () => {
 
     if (userName === "admin" && password === "admin") {
       login();
-      navigate("/dashboard");
+      navigate("/home");
     } else {
       CustomAlert({
         title: "שגיאת התחברות",
