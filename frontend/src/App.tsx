@@ -13,7 +13,7 @@ const App = () => {
     palette: {
       mode: "light",
       primary: { main: "#88cfbf" },
-      secondary: { main: "#f2f2f2" },
+      secondary: { main: "#77c0bc" },
       background: { default: "#f5f5f5" },
     },
     typography: {
