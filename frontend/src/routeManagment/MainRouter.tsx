@@ -3,34 +3,35 @@ import LoginPage from "../pages/LoginPage";
 import NotFound from "../pages/NotFound";
 import RaanPage from "../pages/RaanPage";
 import ProtectedRoute from "../components/ProtectedRoute";
-
-
+import RamadView from "../pages/ramadView/RamadView";
 
 const MainRouter = () => {
-    const routes = [
+  const routes = [
     { path: "/", element: <LoginPage /> },
     { path: "/dashboard", element: <RaanPage /> },
+    { path: "/home", element: <RamadView /> },
     { path: "*", element: <NotFound /> },
   ];
 
-  return (<BrowserRouter>
-            <Routes>
-              {routes.map((route) => (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  element={
-                    ["/", "*"].includes(route.path) ? (
-                      route.element
-                    ) : (
-                      <ProtectedRoute>{route.element}</ProtectedRoute>
-                    )
-                  }
-                />
-              ))}
-            </Routes>
-          </BrowserRouter>);
-}
-
+  return (
+    <BrowserRouter>
+      <Routes>
+        {routes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              ["/", "*"].includes(route.path) ? (
+                route.element
+              ) : (
+                <ProtectedRoute>{route.element}</ProtectedRoute>
+              )
+            }
+          />
+        ))}
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default MainRouter;

@@ -2,116 +2,90 @@ import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { AgGridReact } from "ag-grid-react";
 import { AG_GRID_LOCALE_IL } from "@ag-grid-community/locale";
 import image from "../../assets/background_2.jpeg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import { useState } from "react";
+import EditReportModal from "./components/EditReportModal";
+import type { ReportType } from "../../constData/userReport";
 
-interface SoliderRow {
+export interface SoliderRow {
   soliderName: string;
-  report: string;
+  report: ReportType;
   actions?: any; // You can later define a more specific type if needed
 }
 
+const userName: string = "שורק השורק";
+const rows: SoliderRow[] = [
+  {
+    soliderName: "איציק המלך",
+    report: "לוטם",
+  },
+  {
+    soliderName: "אדיר dfsfd",
+    report: "כוננות-בית",
+  },
+  {
+    soliderName: "שאול המלך",
+    report: "כוננות-בית",
+  },
+  {
+    soliderName: "נועם רוזיליו",
+    report: "כוננות-בית",
+  },
+];
+
 const RamadView = () => {
-  const userName: string = "שורק השורק";
-  const rows: SoliderRow[] = [
-    {
-      soliderName: "איציק המלך",
-      report: "לוטם",
-      actions: (
-        <IconButton>
-          <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />
-        </IconButton>
-      ),
-    },
-    {
-      soliderName: "אדיר dfsfd",
-      report: "כוננות-בית",
-    },
-    {
-      soliderName: "שאול המלך",
-      report: "כוננות-בית",
-    },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-    // {
-    //   soliderName: "שאול המלך",
-    //   report: "כוננות-בית",
-    // },
-  ];
+  const [openEdit, setOpenModal] = useState(false);
+  const [chosenSolider, setChosenSolider] = useState<SoliderRow | null>(null);
+  const [soliders, setSoliders] = useState<SoliderRow[]>(rows);
+
+  const handleClickOpen = (row: SoliderRow) => {
+    setChosenSolider(row);
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
+  };
+
+  const handleSave = (report: ReportType) => {
+    if (chosenSolider) {
+      chosenSolider.report = report;
+    }
+    setSoliders(soliders);
+    handleClose();
+  };
 
   const colDefs: any[] = [
     { field: "soliderName", headerName: "שם חייל" },
     { field: "report", headerName: "דיווח" },
-    { field: "actions", headerName: "פעולות" },
+    {
+      field: "actions",
+      headerName: "פעולות",
+      cellRenderer: (params: any) => (
+        <IconButton onClick={() => handleClickOpen(params.data)}>
+          <ModeEditIcon />
+        </IconButton>
+      ),
+    },
   ];
 
   return (
     <Box sx={styles.background}>
-      <Typography sx={{ color: "white", padding: "2%" }}>
-        שלום, {userName}
-      </Typography>
+      <Typography sx={styles.text}>שלום, {userName}</Typography>
       <Stack
         direction="column"
         justifyContent="center"
         alignItems="center"
         spacing={2}
       >
-        <Typography variant="h5" sx={{ color: "white" }}>
+        <Typography variant="h5" sx={styles.text}>
           חיילים ודיווחים
         </Typography>
         <style>{style}</style>
-        <div style={{ height: "87vh", width: "95vw" }}>
-          <div
-            style={{ height: "100%", width: "100%" }}
-            className="ag-theme-alpine"
-          >
+        <div style={styles.agHeightRestriction}>
+          <div style={styles.agContainer} className="ag-theme-alpine">
             <AgGridReact
-              rowData={rows}
+              rowData={soliders}
               columnDefs={colDefs}
               enableRtl={true}
               localeText={AG_GRID_LOCALE_IL}
@@ -120,6 +94,12 @@ const RamadView = () => {
           </div>
         </div>
       </Stack>
+      <EditReportModal
+        chosenSolider={chosenSolider}
+        open={openEdit}
+        onClose={handleClose}
+        handleSave={handleSave}
+      ></EditReportModal>
     </Box>
   );
 };
@@ -132,6 +112,18 @@ const styles = {
     backgroundRepeat: "no-repeat",
     height: "100vh",
     width: "100%",
+  },
+  text: {
+    color: "white",
+    padding: "2%",
+  },
+  agContainer: {
+    height: "100%",
+    width: "100%",
+  },
+  agHeightRestriction: {
+    height: "87vh",
+    width: "95vw",
   },
 };
 
