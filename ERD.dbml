@@ -1,0 +1,44 @@
+Table Departments {
+  id int [pk, increment]
+  commander_id int
+  parent_department_id int
+  name varchar
+  slots int
+}
+
+Table Users {
+  id int [pk, increment]
+  name varchar
+  password varchar
+  role_id int
+  department_id int
+  city varchar
+}
+
+Table Shifts {
+  id int [pk, increment]
+  date datetime
+  description varchar
+}
+
+Table ShiftAssignments {
+  id int [pk, increment]
+  shift_id int
+  user_id int
+  approved_by int
+  approved_at datetime
+  approval_status varchar 
+}
+
+Table Roles {
+id int [pk, increment]
+name varchar
+}
+
+Ref {Users.department_id > Departments.id}
+Ref {Departments.parent_department_id > Departments.id}
+Ref {ShiftAssignments.shift_id > Shifts.id}
+Ref {ShiftAssignments.user_id > Users.id}
+Ref {ShiftAssignments.approved_by > Users.id}
+Ref {Departments.commander_id > Users.id}
+Ref {Users.role_id > Roles.id}
