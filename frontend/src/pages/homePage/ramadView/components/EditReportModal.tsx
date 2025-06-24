@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import type { SoliderRow } from "../RamadView";
-import { type ReportType } from "../../../constData/userReport";
+import type { ReportType } from "../../../../constData/userReport";
 
 interface EditReportModalProps {
   open: boolean;
@@ -19,7 +19,7 @@ interface EditReportModalProps {
   chosenSolider: SoliderRow | null;
 }
 
-const soliderLocOptions: ReportType[] = ["לוטם", "כוננות-בית", "אחר"];
+const soliderLocOptions: ReportType[] = ["בסיס", "כוננות-בית", "אחר"];
 
 const EditReportModal = ({
   onClose,

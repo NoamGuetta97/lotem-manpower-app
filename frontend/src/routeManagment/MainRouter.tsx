@@ -3,13 +3,13 @@ import LoginPage from "../pages/LoginPage";
 import NotFound from "../pages/NotFound";
 import RaanPage from "../pages/RaanPage";
 import ProtectedRoute from "../components/ProtectedRoute";
-import RamadView from "../pages/ramadView/RamadView";
+import HomeScreen from "../pages/homePage/HomeScreen";
 
 const MainRouter = () => {
   const routes = [
     { path: "/", element: <LoginPage /> },
     { path: "/dashboard", element: <RaanPage /> },
-    { path: "/home", element: <RamadView /> },
+    { path: "/home", element: <HomeScreen /> },
     { path: "*", element: <NotFound /> },
   ];
 

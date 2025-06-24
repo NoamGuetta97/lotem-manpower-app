@@ -1,1 +1,1 @@
-export type ReportType = "לוטם" | "כוננות-בית" | "אחר";
+export type ReportType = "בסיס" | "כוננות-בית" | "אחר";
