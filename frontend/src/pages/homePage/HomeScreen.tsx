@@ -7,7 +7,6 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import image from "../../assets/background_2.jpeg";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 import MainTab from "./MainTab";

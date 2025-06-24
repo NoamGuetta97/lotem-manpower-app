@@ -10,7 +10,7 @@ export interface SearchBarProps {
 const SearchBar = ({ searchValue, setSearchValue }: SearchBarProps) => {
   return (
     <Box sx={styles.container}>
-      <Paper component="form" sx={styles.container}>
+      <Paper component="form" sx={styles.inputContainer}>
         <IconButton type="button" sx={styles.searchIcon} aria-label="search">
           <LuSearch size={14} />
         </IconButton>
