@@ -45,26 +45,6 @@ const rows: SoliderRow[] = [
     soliderName: "dfgda",
     report: "כוננות-בית",
   },
-  {
-    soliderName: "dfgdfg",
-    report: "כוננות-בית",
-  },
-  {
-    soliderName: "dfgdfg",
-    report: "כוננות-בית",
-  },
-  {
-    soliderName: "dfgfdga",
-    report: "כוננות-בית",
-  },
-  {
-    soliderName: "asdaadw dfa",
-    report: "כוננות-בית",
-  },
-  {
-    soliderName: "awd dfa",
-    report: "כוננות-בית",
-  },
 ];
 
 const RamadView = () => {

@@ -26,6 +26,8 @@ declare module "@mui/material/Tabs" {
 
 const madorName: string = "מדור UMC";
 
+const slots: number = 5;
+
 const tabs: tab[] = [
   { name: "דיווחים", value: "reports" },
   { name: "חיילים", value: "another" },
@@ -59,6 +61,17 @@ const HomeScreen = () => {
         </Toolbar>
       </AppBar>
       <Typography sx={styles.departmentText}>{madorName}</Typography>
+      <Typography
+        sx={{
+          fontStyle: "Inter",
+          fontSize: 11,
+          fontWeight: 400,
+          marginLeft: 2,
+          marginBottom: 3
+        }}
+      >
+        הקצאות: {slots}
+      </Typography>
 
       <Tabs
         value={currentTab}
@@ -105,7 +118,7 @@ const styles = {
     fontStyle: "Inter",
     fontWeight: 700,
     fontSize: 13,
-    margin: 2,
+    margin: "16px 0px 0px 16px",
   },
   tabs: {
     minHeight: 28,
